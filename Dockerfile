@@ -1,6 +1,6 @@
 FROM docker:19.03-dind
 
-ENV GOLANG_VERSION 1.13.1
+ENV GOLANG_VERSION 1.14
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
@@ -25,11 +25,12 @@ RUN set -eux; \
 	apkArch="$(apk --print-arch)"; \
 	case "$apkArch" in \
 		armhf) export GOARM='6' ;; \
+		armv7) export GOARM='7' ;; \
 		x86) export GO386='387' ;; \
 	esac; \
 	\
 	wget -O go.tgz "https://golang.org/dl/go$GOLANG_VERSION.src.tar.gz"; \
-	echo '81f154e69544b9fa92b1475ff5f11e64270260d46e7e36c34aafc8bc96209358 *go.tgz' | sha256sum -c -; \
+	echo '6d643e46ad565058c7a39dac01144172ef9bd476521f42148be59249e4b74389 *go.tgz' | sha256sum -c -; \
 	tar -C /usr/local -xzf go.tgz; \
 	rm go.tgz; \
 	\
