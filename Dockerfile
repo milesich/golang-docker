@@ -61,6 +61,7 @@ RUN set -eux; \
 	); \
 	\
 	apk del --no-network .build-deps; \
+	apk add git openssl; \
 	\
 # pre-compile the standard library, just like the official binary release tarballs do
 	go install std; \
